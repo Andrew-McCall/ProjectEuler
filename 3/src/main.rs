@@ -2,15 +2,20 @@ fn main() {
     println!("{}", largest_prime_factor(600851475143));
 }
 
-fn largest_prime_factor(n: usize) -> usize {
-    for i in 1..n{
-        let current = n-i;
-        println!("{}", current);
-        if n%current == 0 && is_prime(current) {
-            return current;
-        } 
+fn largest_prime_factor(mut n: usize) -> usize {
+    let mut largest: usize = 0;
+    let mut x = 2;
+    while x * x <= n {
+        if n % x == 0 {
+            largest = x;
+            n = n / x;
+        }
+        x += 1;
     }
-    0
+    if n > largest as usize {
+        largest = n;
+    }
+    largest
 }
 
 fn is_prime(n: usize) -> bool {
